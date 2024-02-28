@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animasi Nama</title>
+<style>
+    body {
+        height: 100dvh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: url("https://cdn.pixabay.com/photo/2020/05/27/08/05/paint-5226159_960_720.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    #main-container {
+        position: relative;
+        width: 500px;
+        height: 500px;
+    }
+
+    #button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 10px 20px;
+        background-color: #db3434;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    #button:hover {
+        background-color: #0011ff;
+    }
+
+    #button.clicked {
+        background-color: #0011ff;
+    }
+
+    .name {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #000000;
+        color: white;
+        font-size: 14px;
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        
+    }
+
+    #name1 {
+      background: url("https://yt3.googleusercontent.com/_q52i8bUAEvcb7JR4e-eNTv23y2A_wg5sCz0NC0GrGtcw1CRMWJSOPVHUDh_bngD0q4gMvVeoA=s900-c-k-c0x00ffffff-no-rj");
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: black;
+      font-weight: 600;
+    }
+    #name2 {
+      background: url("https://blog.myskill.id/wp-content/uploads/2022/02/Figma-Tools-Design-Kolaboratif-Bermanfaat-Bagi-UI-UX-Designer.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: rgb(255, 255, 255);
+      font-weight: 600;
+    }
+    #name3 {
+      background: url("https://yt3.googleusercontent.com/_q52i8bUAEvcb7JR4e-eNTv23y2A_wg5sCz0NC0GrGtcw1CRMWJSOPVHUDh_bngD0q4gMvVeoA=s900-c-k-c0x00ffffff-no-rj");
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: black;
+      font-weight: 600;
+    }
+    #name4 {
+      background: url("https://blog.myskill.id/wp-content/uploads/2022/02/Figma-Tools-Design-Kolaboratif-Bermanfaat-Bagi-UI-UX-Designer.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: rgb(255, 255, 255);
+      font-weight: 600;
+    }
+    #name5 {
+      background: url("https://yt3.googleusercontent.com/_q52i8bUAEvcb7JR4e-eNTv23y2A_wg5sCz0NC0GrGtcw1CRMWJSOPVHUDh_bngD0q4gMvVeoA=s900-c-k-c0x00ffffff-no-rj");
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: black;
+      font-weight: 600;
+    }
+    #name6 {
+      background: url("https://blog.myskill.id/wp-content/uploads/2022/02/Figma-Tools-Design-Kolaboratif-Bermanfaat-Bagi-UI-UX-Designer.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: rgb(255, 255, 255);
+      font-weight: 600;
+    }
+    #name7 {
+      background: url("https://yt3.googleusercontent.com/_q52i8bUAEvcb7JR4e-eNTv23y2A_wg5sCz0NC0GrGtcw1CRMWJSOPVHUDh_bngD0q4gMvVeoA=s900-c-k-c0x00ffffff-no-rj");
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: black;
+      font-weight: 600;
+    }
+
+    .name.active {
+        opacity: 1;
+    }
+
+    .firework {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #ffdb58;
+        border-radius: 50%;
+        animation: explode 1s ease forwards;
+    }
+
+    
+</style>
+</head>
+<body>
+
+<div id="main-container">
+    <button id="button">Lulus</button>
+    <div class="name" id="name1">Anton : Coding</div>
+    <div class="name" id="name2">Ardian : Desain</div>
+    <div class="name" id="name3">Fathur : Coding</div>
+    <div class="name" id="name4">Renatha : Desain</div>
+    <div class="name" id="name5">Aziz : Coding</div>
+    <div class="name" id="name6">Alif : Desain</div>
+    <div class="name" id="name7">Mukti : Coding</div>
+</div>
+
+<script>
+    const button = document.getElementById('button');
+    const names = document.querySelectorAll('.name');
+    let isClicked = false;
+
+    button.addEventListener('click', () => {
+        if (!isClicked) {
+            button.innerHTML = "Kalian Lulus dan Selamat Bekerja!"; 
+            button.classList.add('clicked');
+            const centerX = window.innerWidth / 4.7; // Posisi horizontal pusat layar
+            const centerY = window.innerHeight / 2.1; // Posisi vertikal pusat layar
+            const totalNames = names.length;
+            const radius = 250; // Jarak dari pusat div
+            const angleStep = (2 * Math.PI) / totalNames; // Langkah sudut antar nama
+            names.forEach((name, index) => {
+                const angle = angleStep * index;
+                const x = centerX + Math.cos(angle) * radius;
+                const y = centerY + Math.sin(angle) * radius;
+                name.style.left = `${x - name.offsetWidth}px`;
+                name.style.top = `${y - name.offsetHeight}px`;
+                setTimeout(() => {
+                    name.classList.add('active');
+                }, index * 200);
+            });
+            isClicked = true;
+        }
+    });
+
+</script>
+
+</body>
+</html>
